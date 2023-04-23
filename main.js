@@ -2,7 +2,7 @@ import './style.css';
 import {Map, View} from 'ol';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
-
+import {fromLonLat} from 'ol/proj';
 const map = new Map({
   target: 'map',
   layers: [
@@ -11,7 +11,8 @@ const map = new Map({
     })
   ],
   view: new View({
-    center: [0, 0],
-    zoom: 2
+    // Change the center property to use Lithuania's coordinates
+    center: fromLonLat([24.6, 55.7]),
+    zoom: 7
   })
 });
