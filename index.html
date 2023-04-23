@@ -5,9 +5,35 @@
     <link rel="icon" type="image/x-icon" href="./images/download.jpeg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OmniGeo</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./style.css">
   </head>
   <body>
-    <div id="map"></div>
+    <div class="d-flex h-100"> <!-- Use d-flex and h-100 -->
+      <div class="p-3 bg-dark" id="sidebar">
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Link 1</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link 2</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link 3</a>
+          </li>
+        </ul>
+      </div>
+      <div id="map-container" class="flex-grow-1 position-relative"> <!-- Add flex-grow-1 and position-relative -->
+        <div id="map"></div>
+        <div id="map-controls" class="bg-dark text-white p-2 rounded">
+          <div id="basemap-label" class="mb-1">Select Basemap:</div>
+          <select id="basemap-select" class="form-select form-select-sm">
+            <option value="osm">OpenStreetMap</option>
+            <option value="satellite">Satellite</option>
+          </select>
+        </div>
+      </div>
+    </div>
     <script type="module" src="./main.js"></script>
   </body>
 </html>
