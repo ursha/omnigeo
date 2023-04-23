@@ -26,3 +26,18 @@ html, body {
   top: 10px;
   right: 10px;
 }
+
+#sidebar img[src="images/house.svg"] {
+  width: 16px;
+  margin-right: 8px;
+}
+
+#sidebar img[src="images/layers.svg"] {
+  width: 24px;
+  margin-right: 12px;
+}
+
+#sidebar img[src="images/cloud-download.svg"] {
+  width: 20px;
+  margin-right: 10px;
+}

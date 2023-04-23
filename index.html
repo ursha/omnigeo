@@ -9,31 +9,41 @@
     <link rel="stylesheet" href="./style.css">
   </head>
   <body>
-    <div class="d-flex h-100"> <!-- Use d-flex and h-100 -->
+
+    
+    <div class="d-flex h-100">
       <div class="p-3 bg-dark" id="sidebar">
+        <h2 class="text-white mb-3">OmniGeo</h2>
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            <a class="nav-link active" href="#">Link 1</a>
+            <a class="nav-link active d-flex align-items-center" href="#">
+              <img src="images/house.svg" alt="Icon 1" class="me-2"> Home
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link 2</a>
+            <a class="nav-link d-flex align-items-center" href="#">
+              <img src="images/layers.svg" alt="Icon 2" class="me-2"> Layers
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link 3</a>
+            <a class="nav-link d-flex align-items-center" href="#">
+              <img src="images/cloud-download.svg" alt="Icon 3" class="me-2"> Download
+            </a>
           </li>
         </ul>
       </div>
-      <div id="map-container" class="flex-grow-1 position-relative"> <!-- Add flex-grow-1 and position-relative -->
+      <div id="map-container" class="flex-grow-1 position-relative">
         <div id="map"></div>
         <div id="map-controls" class="bg-dark text-white p-2 rounded">
           <div id="basemap-label" class="mb-1">Select Basemap:</div>
           <select id="basemap-select" class="form-select form-select-sm">
-            <option value="osm">OpenStreetMap</option>
+            <option value="osm">Open Stree tMap</option>
             <option value="satellite">Satellite</option>
           </select>
         </div>
       </div>
     </div>
+    
     <script type="module" src="./main.js"></script>
   </body>
 </html>
