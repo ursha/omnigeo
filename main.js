@@ -1,12 +1,21 @@
+// import necessary modules
 import Map from 'ol/Map.js';
 import MousePosition from 'ol/control/MousePosition.js';
+import ScaleBar from 'ol/control/ScaleLine.js';
 import OSM from 'ol/source/OSM.js';
 import TileLayer from 'ol/layer/Tile.js';
 import View from 'ol/View.js';
 import {createStringXY} from 'ol/coordinate.js';
-import {defaults as defaultControls} from 'ol/control.js';
+import {OverviewMap,defaults as defaultControls} from 'ol/control.js';
 import XYZ from 'ol/source/XYZ.js';
 
+
+
+
+
+
+
+// create the mouse position control
 const mousePositionControl = new MousePosition({
   coordinateFormat: createStringXY(4),
   projection: 'EPSG:4326',
@@ -15,9 +24,16 @@ const mousePositionControl = new MousePosition({
   className: 'custom-mouse-position',
   target: document.getElementById('mouse-position'),
 });
+// create the scale bar control
+const scaleBarControl = new ScaleBar({
+  units: 'metric', // set the units for the scale bar
+  bar: true, // set to true for a scale bar
+  steps: 4, // set the number of steps in the scale bar
+  text: true, // set to true to display the scale bar text
+});
 
 const map = new Map({
-  controls: defaultControls().extend([mousePositionControl]),
+  controls: defaultControls().extend([mousePositionControl, scaleBarControl]),
   layers: [
     new TileLayer({
       source: new OSM(),
@@ -30,7 +46,7 @@ const map = new Map({
     projection: 'EPSG:4326', // set the projection for the view
   }),
 });
-
+// add an event listener for the basemap select dropdown
 const basemapSelect = document.getElementById('basemap-select');
 basemapSelect.addEventListener('change', function (event) {
   const selectedValue = event.target.value;
