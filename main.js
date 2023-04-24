@@ -1,37 +1,70 @@
-import './style.css';
-import {Map, View} from 'ol';
-import TileLayer from 'ol/layer/Tile';
-import OSM from 'ol/source/OSM';
-import XYZ from 'ol/source/XYZ';
-import {fromLonLat} from 'ol/proj';
+import Map from 'ol/Map.js';
+import MousePosition from 'ol/control/MousePosition.js';
+import OSM from 'ol/source/OSM.js';
+import TileLayer from 'ol/layer/Tile.js';
+import View from 'ol/View.js';
+import {createStringXY} from 'ol/coordinate.js';
+import {defaults as defaultControls} from 'ol/control.js';
+import XYZ from 'ol/source/XYZ.js';
 
-const osmLayer = new TileLayer({
-  source: new OSM()
-});
-
-const satelliteLayer = new TileLayer({
-  source: new XYZ({
-    url: 'https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
-    attributions: 'Map data ©2022 Google'
-  })
+const mousePositionControl = new MousePosition({
+  coordinateFormat: createStringXY(4),
+  projection: 'EPSG:4326',
+  // comment the following two lines to have the mouse position
+  // be placed within the map.
+  className: 'custom-mouse-position',
+  target: document.getElementById('mouse-position'),
 });
 
 const map = new Map({
+  controls: defaultControls().extend([mousePositionControl]),
+  layers: [
+    new TileLayer({
+      source: new OSM(),
+    }),
+  ],
   target: 'map',
-  layers: [osmLayer],
   view: new View({
-    center: fromLonLat([24.6, 55.7]),
-    zoom: 7
-  })
+    center: [2638930, 7473825], // Lithuania coordinates in EPSG:3857 projection
+    zoom: 7,
+    projection: 'EPSG:3857', // set the projection for the view
+  }),
 });
 
-document.getElementById('basemap-select').addEventListener('change', event => {
-  const value = event.target.value;
-  if (value === 'osm') {
-    map.removeLayer(satelliteLayer);
-    map.addLayer(osmLayer);
-  } else if (value === 'satellite') {
-    map.removeLayer(osmLayer);
-    map.addLayer(satelliteLayer);
+const projectionSelect = document.getElementById('projection');
+projectionSelect.addEventListener('change', function (event) {
+  mousePositionControl.setProjection(event.target.value);
+});
+
+const precisionInput = document.getElementById('precision');
+precisionInput.addEventListener('change', function (event) {
+  const format = createStringXY(event.target.valueAsNumber);
+  mousePositionControl.setCoordinateFormat(format);
+});
+
+const basemapSelect = document.getElementById('basemap-select');
+basemapSelect.addEventListener('change', function (event) {
+  const selectedValue = event.target.value;
+  let newLayerSource;
+
+  if (selectedValue === 'satellite') {
+    // replace the OSM source with a satellite source
+    newLayerSource = new TileLayer({
+      source: new XYZ({
+        url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        tileSize: 512,
+        maxZoom: 20,
+        
+      }),
+    });
+  } else {
+    // use the default OSM source
+    newLayerSource = new TileLayer({
+      source: new OSM(),
+    });
   }
+
+  // remove the old layer and add the new one
+  map.getLayers().removeAt(0);
+  map.getLayers().insertAt(0, newLayerSource);
 });

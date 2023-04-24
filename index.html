@@ -7,42 +7,37 @@
     <title>OmniGeo</title>
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./style.css">
+    
   </head>
   <body>
-
-    
-    <div class="d-flex h-100">
-      <div class="p-3 bg-dark" id="sidebar">
-        <h2 class="text-white mb-3">OmniGeo</h2>
-        <ul class="nav nav-pills flex-column">
-          <li class="nav-item">
-            <a class="nav-link active d-flex align-items-center" href="#">
-              <img src="images/house.svg" alt="Icon 1" class="me-2"> Home
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link d-flex align-items-center" href="#">
-              <img src="images/layers.svg" alt="Icon 2" class="me-2"> Layers
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link d-flex align-items-center" href="#">
-              <img src="images/cloud-download.svg" alt="Icon 3" class="me-2"> Download
-            </a>
-          </li>
-        </ul>
-      </div>
       <div id="map-container" class="flex-grow-1 position-relative">
         <div id="map"></div>
+        
         <div id="map-controls" class="bg-dark text-white p-2 rounded">
           <div id="basemap-label" class="mb-1">Select Basemap:</div>
           <select id="basemap-select" class="form-select form-select-sm">
-            <option value="osm">Open Stree tMap</option>
+            <option value="osm">Open Street Map</option>
             <option value="satellite">Satellite</option>
+          </select>
+        </div>
+        <div id="mouse-location" class="bg-dark text-white p-2 rounded">
+          <div id="mouse-position"></div>
+            <form>
+              <label for="projection">Projection : </label>
+              <select id="projection">
+                <option value="EPSG:4326">EPSG:4326</option>
+                <option value="EPSG:3857">EPSG:3857</option>
+                <option value="EPSG:27700">EPSG:27700</option>
+              </select>
+              <label for="precision">Precision : </label>
+              <input id="precision" type="number" min="0" max="12" value="4"/>
+            </form>
+          
           </select>
         </div>
       </div>
     </div>
+    
     
     <script type="module" src="./main.js"></script>
   </body>
