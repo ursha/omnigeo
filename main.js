@@ -54,7 +54,27 @@ basemapSelect.addEventListener('change', function (event) {
         url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
         tileSize: 512,
         maxZoom: 20,
-        
+      }),
+    });
+  } else if (selectedValue === 'CartoDb') {
+    // replace the OSM source with a CartoDB source
+    newLayerSource = new TileLayer({
+      source: new XYZ({
+        url: 'http://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+      }),
+    });
+  } else if (selectedValue === 'Esri Gray (light)') {
+    // replace the OSM source with a Esri Gray (light) source
+    newLayerSource = new TileLayer({
+      source: new XYZ({
+        url: 'http://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+      }),
+    });
+  } else if (selectedValue === 'Esri Gray (dark)') {
+    // replace the OSM source with a Esri Gray (light) source
+    newLayerSource = new TileLayer({
+      source: new XYZ({
+        url: 'http://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
       }),
     });
   } else {
@@ -68,3 +88,4 @@ basemapSelect.addEventListener('change', function (event) {
   map.getLayers().removeAt(0);
   map.getLayers().insertAt(0, newLayerSource);
 });
+
