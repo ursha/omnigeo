@@ -25,21 +25,10 @@ const map = new Map({
   ],
   target: 'map',
   view: new View({
-    center: [2638930, 7473825], // Lithuania coordinates in EPSG:3857 projection
+    center: [24, 55], 
     zoom: 7,
-    projection: 'EPSG:3857', // set the projection for the view
+    projection: 'EPSG:4326', // set the projection for the view
   }),
-});
-
-const projectionSelect = document.getElementById('projection');
-projectionSelect.addEventListener('change', function (event) {
-  mousePositionControl.setProjection(event.target.value);
-});
-
-const precisionInput = document.getElementById('precision');
-precisionInput.addEventListener('change', function (event) {
-  const format = createStringXY(event.target.valueAsNumber);
-  mousePositionControl.setCoordinateFormat(format);
 });
 
 const basemapSelect = document.getElementById('basemap-select');
@@ -88,4 +77,3 @@ basemapSelect.addEventListener('change', function (event) {
   map.getLayers().removeAt(0);
   map.getLayers().insertAt(0, newLayerSource);
 });
-
