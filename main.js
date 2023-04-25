@@ -41,9 +41,9 @@ const map = new Map({
   ],
   target: 'map',
   view: new View({
-    center: [24, 55], 
-    zoom: 7,
-    projection: 'EPSG:4326', // set the projection for the view
+    center: [2666865.3349, 7374397.8447], 
+    zoom: 5,
+    projection: 'EPSG:3857', // set the projection for the view
   }),
 });
 // add an event listener for the basemap select dropdown

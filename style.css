@@ -26,11 +26,9 @@ html, body {
 }
 #mouse-location {
   position: absolute;
-  top: 850px;
+  bottom: 50px;
   right: 25px;
   opacity: 0.8;
-  
 }
-
 
 
