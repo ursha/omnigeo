@@ -60,6 +60,29 @@ html, body {
   border-color: rgba(0,0,0,0); /* Set border color to transparent */
 }
 
+.box {
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+}
+
+.box label {
+  font-weight: bold;
+}
+
+.box select {
+  margin-left: 1rem;
+  flex-grow: 1;
+}
+
+.box button {
+  margin-left: 1rem;
+}
+
+
+
+
 
 /* select basemap */
 .form-select {
@@ -68,3 +91,29 @@ html, body {
   right: 0;
 }
 
+
+/* buttons  */
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: absolute;
+  right: 10px;
+  top: 200px;
+}
+
+
+
+
+#button1,
+#button2,
+#button3 {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  margin-right: 10px;
+  font-size: 14px;
+  width: 100px;
+}
