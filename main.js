@@ -2,16 +2,23 @@
 import Map from 'ol/Map.js';
 import MousePosition from 'ol/control/MousePosition.js';
 import ScaleBar from 'ol/control/ScaleLine.js';
-import OSM from 'ol/source/OSM.js';
+import {OSM, Vector as VectorSource} from 'ol/source.js';
 import TileLayer from 'ol/layer/Tile.js';
 import View from 'ol/View.js';
 import {createStringXY} from 'ol/coordinate.js';
-import {OverviewMap,defaults as defaultControls} from 'ol/control.js';
+import {defaults as defaultControls} from 'ol/control.js';
 import XYZ from 'ol/source/XYZ.js';
+import Draw from 'ol/interaction/Draw.js';
+import {Circle, Polygon} from 'ol/geom.js';
+import {Vector as VectorLayer} from 'ol/layer.js';
+import {createRegularPolygon, createBox} from 'ol/interaction/Draw.js'
 
 
-
-
+///drawing
+const source = new VectorSource({wrapX: false});
+const vector = new VectorLayer({
+  source: source,
+});
 
 
 
@@ -38,6 +45,7 @@ const map = new Map({
     new TileLayer({
       source: new OSM(),
     }),
+    vector,
   ],
   target: 'map',
   view: new View({
@@ -93,3 +101,80 @@ basemapSelect.addEventListener('change', function (event) {
   map.getLayers().removeAt(0);
   map.getLayers().insertAt(0, newLayerSource);
 });
+
+//drawing shapres
+
+const typeSelect = document.getElementById('type');
+
+let draw; // global so we can remove it later
+function addInteraction() {
+  let value = typeSelect.value;
+  if (value !== 'None') {
+    let geometryFunction;
+    if (value === 'Square') {
+      value = 'Circle';
+      geometryFunction = createRegularPolygon(4);
+    } else if (value === 'Box') {
+      value = 'Circle';
+      geometryFunction = createBox();
+    } else if (value === 'Star') {
+      value = 'Circle';
+      geometryFunction = function (coordinates, geometry) {
+        const center = coordinates[0];
+        const last = coordinates[coordinates.length - 1];
+        const dx = center[0] - last[0];
+        const dy = center[1] - last[1];
+        const radius = Math.sqrt(dx * dx + dy * dy);
+        const rotation = Math.atan2(dy, dx);
+        const newCoordinates = [];
+        const numPoints = 12;
+        for (let i = 0; i < numPoints; ++i) {
+          const angle = rotation + (i * 2 * Math.PI) / numPoints;
+          const fraction = i % 2 === 0 ? 1 : 0.5;
+          const offsetX = radius * fraction * Math.cos(angle);
+          const offsetY = radius * fraction * Math.sin(angle);
+          newCoordinates.push([center[0] + offsetX, center[1] + offsetY]);
+        }
+        newCoordinates.push(newCoordinates[0].slice());
+        if (!geometry) {
+          geometry = new Polygon([newCoordinates]);
+        } else {
+          geometry.setCoordinates([newCoordinates]);
+        }
+        return geometry;
+      };
+    }
+    draw = new Draw({
+      source: source,
+      type: value,
+      geometryFunction: geometryFunction,
+    });
+    map.addInteraction(draw);
+  }
+}
+
+/**
+ * Handle change event.
+ */
+typeSelect.onchange = function () {
+  map.removeInteraction(draw);
+  addInteraction();
+};
+
+document.getElementById('trash').addEventListener('click', function () {
+  source.clear(); // Clear all drawn shapes
+});
+
+
+//draw
+const dropdown = document.querySelector('.dropdown');
+  const button = dropdown.querySelector('.dropdown-toggle');
+  const items = dropdown.querySelectorAll('.dropdown-item');
+
+  items.forEach(item => {
+    item.addEventListener('click', event => {
+      event.preventDefault();
+      const value = item.getAttribute('data-value');
+      button.textContent = `Draw: ${value}`;
+    });
+  });

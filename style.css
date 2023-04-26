@@ -1,10 +1,9 @@
 @import "node_modules/ol/ol.css";
 
 html, body {
-  margin: 0;
   height: 100%;
+  overflow: hidden;
 }
-
 
 
 #map-container {
@@ -23,12 +22,49 @@ html, body {
   top: 10px;
   right: 10px;
   opacity: 0.8;
+  
 }
 #mouse-location {
   position: absolute;
-  bottom: 50px;
+  bottom: 35px;
   right: 25px;
   opacity: 0.8;
+  
 }
 
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: right;
+}
+/* draw text  */
+.input-group-text {
+  background-color: #f1f1f1;
+  color: #555;
+  border: none;
+  
+}
+
+
+/* trash buttons */
+.btn-success {
+  color: #f3eded;
+  background-color: rgba(0,0,0,0.5); /* Change the background color to the desired dark color */
+  border-color: rgba(14, 10, 10, 0); /* Set border color to transparent */
+ 
+}
+/* trash buttons */
+.btn-success:hover {
+  color: #fff;
+  background-color: rgba(204, 21, 21, 0.8); /* Change the background color on hover to desired darker color */
+  border-color: rgba(0,0,0,0); /* Set border color to transparent */
+}
+
+
+/* select basemap */
+.form-select {
+  width: 200px;
+  margin-right: 10px;
+  right: 0;
+}
 
