@@ -12,6 +12,8 @@ import Draw from 'ol/interaction/Draw.js';
 import {Circle, Polygon} from 'ol/geom.js';
 import {Vector as VectorLayer} from 'ol/layer.js';
 import {createRegularPolygon, createBox} from 'ol/interaction/Draw.js'
+import {getArea, getLength} from 'ol/sphere.js';
+import {unByKey} from 'ol/Observable.js';
 
 
 ///drawing
@@ -166,15 +168,39 @@ document.getElementById('trash').addEventListener('click', function () {
 });
 
 
-//draw
-const dropdown = document.querySelector('.dropdown');
-  const button = dropdown.querySelector('.dropdown-toggle');
-  const items = dropdown.querySelectorAll('.dropdown-item');
 
-  items.forEach(item => {
-    item.addEventListener('click', event => {
-      event.preventDefault();
-      const value = item.getAttribute('data-value');
-      button.textContent = `Draw: ${value}`;
-    });
-  });
+
+// BUTTON UPLOAD/////
+// Find the upload GeoJSON button
+const uploadBtn = document.getElementById("upload-geojson-btn");
+
+// Add a click event listener to the button
+uploadBtn.addEventListener("click", () => {
+  // Allow the user to select a file
+  const input = document.createElement("input");
+  input.type = "file";
+
+  // Handle the file selection
+  input.onchange = (event) => {
+    const file = event.target.files[0];
+
+    // Check that the file is a GeoJSON file
+    if (file.type === "application/json" || file.name.endsWith(".geojson")) {
+      // Read the file contents as text
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const text = event.target.result;
+
+        // Parse the GeoJSON and add it to the map
+        const geojson = JSON.parse(text);
+        L.geoJSON(geojson).addTo(map);
+      };
+      reader.readAsText(file);
+    } else {
+      alert("Please select a GeoJSON file.");
+    }
+  };
+
+  // Click the input button to open the file selection dialog
+  input.click();
+});

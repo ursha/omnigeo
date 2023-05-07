@@ -37,12 +37,19 @@ html, body {
   justify-content: center;
   align-items: right;
 }
+/* drawing box */
+.box {
+  border-radius: 0.25rem;
+  padding: 1rem;
+}
+
+
 /* draw text  */
 .input-group-text {
-  background-color: #f1f1f1;
-  color: #555;
+  background-color: #0f0f0f;
+  color: #f5eded;
   border: none;
-  
+  opacity: 0.5;
 }
 
 
@@ -60,28 +67,6 @@ html, body {
   border-color: rgba(0,0,0,0); /* Set border color to transparent */
 }
 
-.box {
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-  padding: 1rem;
-  background-color: #f8f9fa;
-}
-
-.box label {
-  font-weight: bold;
-}
-
-.box select {
-  margin-left: 1rem;
-  flex-grow: 1;
-}
-
-.box button {
-  margin-left: 1rem;
-}
-
-
-
 
 
 /* select basemap */
@@ -92,28 +77,23 @@ html, body {
 }
 
 
-/* buttons  */
 
-.button-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+/* layer chooser  */
+#layer-chooser-container {
   position: absolute;
-  right: 10px;
-  top: 200px;
+  top: 50px;
+  transform: translateY(-50%);
 }
 
 
-
-
-#button1,
-#button2,
-#button3 {
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
-  margin-right: 10px;
-  font-size: 14px;
-  width: 100px;
+#layer-chooser {
+  position: relative;
+  top: 500px;
+  padding: 10px;
+  border-radius: 5px;
+  opacity: 0.8;
+  bottom: 35px;
+  right: 25px; 
 }
+
+

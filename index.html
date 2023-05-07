@@ -11,6 +11,7 @@
     <title>OmniGeo</title>
     <!-- Link to the Bootstrap CSS file -->
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    
     <!-- Link to the custom CSS file -->
     <link rel="stylesheet" href="./style.css">
   </head>
@@ -18,7 +19,9 @@
     <!-- Container for the map -->
     <div id="map-container" class="flex-grow-1 position-relative">
       <!-- Map element -->
-      <div id="map"></div>       
+      <div id="map"></div>
+      
+           
       <!-- Map controls -->
       <div id="map-controls" class="bg-dark text-white p-2 rounded">
         <div id="basemap-label" class="mb-1">Select Basemap:</div>
@@ -61,20 +64,35 @@
           </div>
         </div>
       </div>
-
-      <!-- buttons -->
-      <div class="button-container">
-        <button type="button" class="btn btn-primary position-relative" id="button1">
-          Button 1
-        </button>
-        <button type="button" class="btn btn-secondary position-relative" id="button2">
-          Button 2
-        </button>
-        <button type="button" class="btn btn-danger position-relative" id="button3">
-          Button 3
-        </button>
+       <!-- Layer chooser -->
+       <div id="layer-chooser-container" class="position-absolute top-0 end-0 mt-3 me-3">
+        <div id="layer-chooser" class="bg-dark text-white rounded">
+          <h5 class="mb-3">Layers</h5>
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" value="" id="layer1">
+            <label class="form-check-label" for="layer1">
+              Layer 1
+            </label>
+          </div>
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" value="" id="layer2">
+            <label class="form-check-label" for="layer2">
+              Layer 2
+            </label>
+          </div>
+          <!-- Add more layers here -->
+        </div>
       </div>
+      <!-- Export form and button above the map -->
+    
       
+
+
+
+   
+
     <script type="module" src="./main.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
   </body>
 </html>
