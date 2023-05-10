@@ -213,3 +213,12 @@ searchBtn.addEventListener("click", function(event) {
   event.preventDefault();
   searchLocation();
 });
+
+
+// home button to refresh the map 
+
+const homeButton = document.querySelector('.map-button');
+
+homeButton.addEventListener('click', () => {
+  location.reload();
+});
