@@ -115,7 +115,7 @@ html, body {
   width: 70%; /* adjust the width as needed */
 }
 #search-btn {
-  width: 30%; /* adjust the width as needed */
+  width: 20%; /* adjust the width as needed */
   background-color: #0f0f0f; /* set the initial background color of the button */
   transition: background-color 0.2s ease; /* add a smooth transition effect */
   opacity: 0.5;

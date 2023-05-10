@@ -12,7 +12,9 @@ import Draw from 'ol/interaction/Draw.js';
 import {Circle, Polygon} from 'ol/geom.js';
 import {Vector as VectorLayer} from 'ol/layer.js';
 import {createRegularPolygon, createBox} from 'ol/interaction/Draw.js'
-import Geocoder from 'ol-geocoder';
+import { fromLonLat } from 'ol/proj';
+
+
 
 
 
@@ -168,6 +170,46 @@ document.getElementById('trash').addEventListener('click', function () {
 });
 
 
+// search location 
 
+const searchBtn = document.getElementById("search-btn");
+const searchInput = document.querySelector(".form-control");
 
+function searchLocation() {
+  // Get the user's search query
+  const searchQuery = searchInput.value;
 
+  // Use the Nominatim API to get the coordinates of the search query
+  fetch(`https://nominatim.openstreetmap.org/search?q=${searchQuery}&format=json&addressdetails=1`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.length > 0) {
+        const latitude = parseFloat(data[0].lat);
+        const longitude = parseFloat(data[0].lon);
+        console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+        
+        // Set the view to the coordinates returned by the geocoding API
+        map.getView().setCenter(fromLonLat([longitude, latitude]));
+        map.getView().setZoom(14);
+      } else {
+        console.error("Could not geocode the search query");
+      }
+    })
+    .catch(error => {
+      console.error(`An error occurred while geocoding the search query: ${error}`);
+    });
+}
+
+// Trigger search when Enter key is pressed
+searchInput.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    searchLocation();
+  }
+});
+
+// Trigger search when button is clicked
+searchBtn.addEventListener("click", function(event) {
+  event.preventDefault();
+  searchLocation();
+});
