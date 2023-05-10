@@ -26,7 +26,7 @@
       <div id="map-controls" class="bg-dark text-white p-2 rounded">
         <div id="basemap-label" class="mb-1">Select Basemap:</div>
         <!-- Basemap selector -->
-        <select id="basemap-select" class="form-select form-select-sm">
+        <select id="basemap-select" class="form-select form-select-sm" data-toggle="tooltip" data-placement="top" title="Choose a basemap">
           <option value="osm">Open Street Map</option>
           <option value="satellite">Satellite</option>
           <option value="CartoDb">CartoDb</option>
@@ -89,7 +89,7 @@
         <form>
           <div class="input-group">
             <input class="form-control form-control-sm" type="search" placeholder="Search" aria-label="Search">
-            <button type="button" class="btn btn-success" id="search-btn">
+            <button type="button" class="btn btn-success" id="search-btn" data-toggle="tooltip" data-placement="top" title="Search for location">
               <img src="./images/magnifying_glass.png" alt="Search" width="16" height="16">
             </button>
           </div>
@@ -97,10 +97,11 @@
       </div>
       
       <div class="map-container">
-        <div id="map"></div>
-        <button type="button" class="btn btn-primary map-button">
-          <img src="./images/house.svg" alt="Image" width="30" height="30">
+        
+        <button type="button" class="btn btn-primary map-button" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Go to home">
+          <img src="./images/house.svg" alt="Image" width="25" height="25">
         </button>
+        
       </div>
 
 

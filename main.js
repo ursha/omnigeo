@@ -222,3 +222,9 @@ const homeButton = document.querySelector('.map-button');
 homeButton.addEventListener('click', () => {
   location.reload();
 });
+
+// tooltips
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
