@@ -15,6 +15,7 @@
     "maplibre-gl": "^2.4.0",
     "ol": "latest",
     "ol-ext": "^4.0.7",
+    "ol-geocoder": "^4.1.2",
     "ol-layerswitcher": "^4.1.1"
   }
 }
