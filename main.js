@@ -225,6 +225,6 @@ homeButton.addEventListener('click', () => {
 
 // tooltips
 
-$(function () {
+(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })

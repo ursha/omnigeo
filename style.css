@@ -136,8 +136,8 @@ html, body {
 /* home button  */
 .map-button img {
   filter: brightness(0) invert(1);
-  width: 24px;
-  height: 24px;
+  width: 25px;
+  height: 25px;
 }
 
 .map-container {
@@ -168,4 +168,5 @@ html, body {
 .btn-primary img {
   margin-right: 5px;
 }
+
 
